@@ -175,4 +175,47 @@ class UsersController extends Controller
         echo "<p>Email: $customer_id->email</p>";
         echo "<p>Phone Number: $customer_id->phone</p>";
     }
+
+    public function mobilelogin(Request $request){
+        try {
+            $data = $request->all();
+            $email = $data['email'];
+            $password = $data['password'];
+            $muser=User::where('email', $email)->where('password',$password)->first();
+            if(!!$muser){
+                $remember_token=$muser->remember_token;
+                $success=true;
+                return response()->json(compact('success', 'remember_token'));;
+            }else{
+                $success=false;
+                $message = "Email  or password is wrong!";
+                return response()->json(compact('success', 'message'));;
+            }
+        } catch ( Exception $e){
+            $success = false;
+            $message = $e->getMessage();
+            return response()->json(compact('success', 'message'));;
+        }
+    }
+
+    public function MobileRegister(Request $request){
+        try{
+            $data = $request->all();
+            $email = $data['email'];
+            $password = $data['password'];
+            $name = $data['name'];
+            $muser=User::where('email', $email)->first();
+            if(!!$muser){
+                $message = "User has already existed!";
+                $success = false;
+                return response()->json(compact('success' , 'message'));
+            }else{
+                
+            }
+        }catch(Exception $e){
+                $message = $e->getMessage();
+                $success = false;
+                return responste()->json(compact('success' , 'message'));
+        }
+    }
 }

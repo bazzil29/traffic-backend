@@ -27,17 +27,10 @@ class MobileController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function getCurrentRectangles(){
+        //public function getCurrentRectangles($layer){
+        $success = true;
         $rectangles = $this->business->fetchRectangle();
-        return response()->json($rectangles);
+        return response()->json(compact('rectangles', 'success'));
     }
-
-    public function Login () {   
-        return response()->json();
-    }
-
-    public function Register (Request $request){
-        $res->success = $request;
-        
-        return response()->json($request);
-    }
+    
 }

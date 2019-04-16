@@ -17,8 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/user/login' , 'MobileController@Login'); 
-Route::post('/user/register' , 'MobileController@Register'); 
+Route::post('/user/register' , 'UsersController@MobileRegister'); 
 Route::get('/user/profile' , 'MobileController@Register'); 
-
 Route::get('/getcurrentrectangles', 'MobileController@getCurrentRectangles');
+Route::post('/user/login','UsersController@mobilelogin');
